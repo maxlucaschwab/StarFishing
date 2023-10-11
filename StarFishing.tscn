@@ -1,22 +1,30 @@
-[gd_scene load_steps=11 format=3 uid="uid://dm6lhdt8grlxv"]
+[gd_scene load_steps=14 format=3 uid="uid://dm6lhdt8grlxv"]
 
 [ext_resource type="ArrayMesh" uid="uid://i0chebprpipi" path="res://boat_001.obj" id="1_6k0rk"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="1_mtgp4"]
 [ext_resource type="Script" path="res://boat.gd" id="2_fkm1m"]
 
-[sub_resource type="Animation" id="Animation_l8p6v"]
-resource_name = "boat_rocking"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_hgdyt"]
+resource_name = "fishing_transition"
+length = 2.0
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.131935, 0.196141, 0.208257, 0.5, 1, 0.131935, 0.111925, 0.208257, 1, 1, 0.131935, 0.196141, 0.208257)
+tracks/0/keys = PackedFloat32Array(0, 1, 2.2138, -2.38419e-07, 2.48923, 0.1, 1, 2.28803, -0.000583769, 2.28731, 1, 1, 5.96117, -0.0307124, 5.69255, 1.9, 1, 9.03625, -0.0614245, 13.9312, 2, 1, 8.92287, -0.0614245, 13.5381)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.132724, 0.242554, -0.0335191, 0.960431, 1, 1, 0.0609804, 0.357284, -0.0325694, 0.931434, 1.9, 1, 0, 0, 0, 1)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5f3f"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iaenr"]
 _data = {
-"boat_rocking": SubResource("Animation_l8p6v")
+"fishing_transition": SubResource("Animation_hgdyt")
 }
 
 [sub_resource type="FogMaterial" id="FogMaterial_t05f1"]
@@ -41,25 +49,35 @@ albedo_color = Color(0.121569, 0.258824, 0.384314, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i4xi0"]
 
+[sub_resource type="Animation" id="Animation_l8p6v"]
+resource_name = "boat_rocking"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.131935, 0.196141, 0.208257, 1, 1, 0.131935, 0.111925, 0.208257, 2, 1, 0.131935, 0.196141, 0.208257)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5f3f"]
+_data = {
+"boat_rocking": SubResource("Animation_l8p6v")
+}
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Node3D" type="Node3D" parent="."]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D"]
-root_node = NodePath("MeshInstance3D")
-autoplay = "boat_rocking"
-libraries = {
-"": SubResource("AnimationLibrary_l5f3f")
-}
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/AnimationPlayer"]
-transform = Transform3D(0.0824082, 0, 0.996599, 0, 1, 0, -0.996599, 0, 0.0824082, 0.131935, 0.196141, 0.208257)
-mesh = ExtResource("1_6k0rk")
-skeleton = NodePath("../..")
-script = ExtResource("2_fkm1m")
-
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
-transform = Transform3D(0.880088, 0.128771, 0.457016, 6.90666e-09, 0.962522, -0.271205, -0.474811, 0.238685, 0.847104, 2.2138, -2.38419e-07, 2.48923)
+transform = Transform3D(0.880088, 0.128771, 0.457016, 1.49012e-07, 0.962521, -0.271205, -0.474811, 0.238685, 0.847103, 2.2138, -2.38419e-07, 2.48923)
+script = ExtResource("1_mtgp4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D/Camera3D"]
+libraries = {
+"": SubResource("AnimationLibrary_iaenr")
+}
 
 [node name="FogVolume" type="FogVolume" parent="Node3D"]
 transform = Transform3D(0.599485, 0.0730975, 0.797041, 0, 0.995821, -0.0913278, -0.800386, 0.0547496, 0.596979, -0.0489082, 0.251435, -4.42776)
@@ -76,3 +94,14 @@ mesh = SubResource("PlaneMesh_i4xi0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
 transform = Transform3D(0.577578, -0.592971, 0.56106, -0.630631, 0.112324, 0.767911, -0.51837, -0.797351, -0.30907, 5.62443, 6.6119, -3.68748)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.0824082, 0, 0.996599, 0, 1, 0, -0.996599, 0, 0.0824082, 0.131935, 0.196141, 0.208257)
+mesh = ExtResource("1_6k0rk")
+script = ExtResource("2_fkm1m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D/MeshInstance3D"]
+autoplay = "boat_rocking"
+libraries = {
+"": SubResource("AnimationLibrary_l5f3f")
+}
