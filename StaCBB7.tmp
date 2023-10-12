@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://dm6lhdt8grlxv"]
+[gd_scene load_steps=16 format=3 uid="uid://dm6lhdt8grlxv"]
 
-[ext_resource type="Script" path="res://Node3D.gd" id="1_2kdry"]
 [ext_resource type="ArrayMesh" uid="uid://i0chebprpipi" path="res://boat_001.obj" id="1_6k0rk"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="1_mtgp4"]
 [ext_resource type="Material" uid="uid://dssuos3woi3v" path="res://waterMaterial.tres" id="2_6h2f3"]
-[ext_resource type="Script" path="res://hook.gd" id="5_5mbxk"]
+[ext_resource type="Script" path="res://boat.gd" id="2_fkm1m"]
 
 [sub_resource type="Animation" id="Animation_hgdyt"]
 resource_name = "fishing_transition"
@@ -79,63 +79,13 @@ _data = {
 "boat_rocking": SubResource("Animation_l8p6v")
 }
 
-[sub_resource type="Animation" id="Animation_e37ch"]
-resource_name = "hook throw"
-length = 2.0
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.302778, -0.25, 0, 0.25, 0, 8.94203, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 2)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0.618216, -0.25, 0, 0.2, 2.11513, 6.06666, -0.25, 0, 0.25, 0, -0.169051, -0.20422, 3.4024, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 2)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:position:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 9.24307, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 2)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0087"]
-_data = {
-"hook_throw": SubResource("Animation_e37ch")
-}
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xh4n5"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3dn1n"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_7nuni"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_rjckb"]
-
 [node name="Node3D" type="Node3D"]
 
 [node name="Node3D" type="Node3D" parent="."]
-script = ExtResource("1_2kdry")
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 transform = Transform3D(0.880088, 0.128771, 0.457015, -8.9407e-08, 0.962522, -0.271205, -0.474811, 0.238684, 0.847104, 2.2138, -2.38419e-07, 2.48923)
+script = ExtResource("1_mtgp4")
 
 [node name="cameraAnim" type="AnimationPlayer" parent="Node3D/Camera3D"]
 libraries = {
@@ -144,7 +94,6 @@ libraries = {
 
 [node name="FogVolume" type="FogVolume" parent="Node3D"]
 transform = Transform3D(0.599485, 0.0730975, 0.797041, 0, 0.995821, -0.0913278, -0.800386, 0.0547496, 0.596979, -0.0489082, 0.251435, -4.42776)
-visible = false
 size = Vector3(23.6285, 0.330087, 20.4477)
 material = SubResource("FogMaterial_t05f1")
 
@@ -167,6 +116,7 @@ transform = Transform3D(0.577578, -0.592971, 0.56106, -0.630631, 0.112324, 0.767
 [node name="boat" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(0.0824082, 0, 0.996599, 0, 1, 0, -0.996599, 0, 0.0824082, 0.131935, 0.196141, 0.208257)
 mesh = ExtResource("1_6k0rk")
+script = ExtResource("2_fkm1m")
 
 [node name="boatAnim" type="AnimationPlayer" parent="Node3D/boat"]
 autoplay = "boat_rocking"
@@ -174,30 +124,4 @@ libraries = {
 "": SubResource("AnimationLibrary_l5f3f")
 }
 
-[node name="hook" type="StaticBody3D" parent="Node3D"]
-transform = Transform3D(0.106001, 0, 0, 0, 0.106001, 0, 0, 0, 0.106001, 5.60752, 5.68315, 5.67551)
-script = ExtResource("5_5mbxk")
-
-[node name="hookAnim" type="AnimationPlayer" parent="Node3D/hook"]
-libraries = {
-"": SubResource("AnimationLibrary_f0087")
-}
-
-[node name="hookMesh" type="MeshInstance3D" parent="Node3D/hook"]
-mesh = SubResource("CapsuleMesh_xh4n5")
-
-[node name="hookColl" type="CollisionShape3D" parent="Node3D/hook"]
-shape = SubResource("CapsuleShape3D_3dn1n")
-disabled = true
-
-[node name="star" type="Area3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.4651, 17.3032, 23.0253)
-
-[node name="starMesh" type="MeshInstance3D" parent="Node3D/star"]
-mesh = SubResource("SphereMesh_7nuni")
-
-[node name="starColl" type="CollisionShape3D" parent="Node3D/star"]
-shape = SubResource("SphereShape3D_rjckb")
-
 [connection signal="animation_finished" from="Node3D/Camera3D/cameraAnim" to="Node3D/Camera3D" method="_on_camera_anim_animation_finished"]
-[connection signal="body_entered" from="Node3D/star" to="Node3D/hook" method="_on_star_body_entered"]

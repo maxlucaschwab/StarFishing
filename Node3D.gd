@@ -1,8 +1,9 @@
-extends Camera3D
+extends Node3D
 
 var transition = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	pass
 	
 
@@ -12,14 +13,17 @@ func _process(delta):
 	#	$cameraAnim.play("fishing_transition")
 	mainGameplay()
 	if transition == true:
-		self.position += Vector3(0, -0.01, 0)
+		$Camera3D.position += Vector3(0, -0.01, 0)
 	pass
+	
+	if Input.is_action_just_pressed("quit"):
+		get_tree().quit()
 
 
 func mainGameplay():
 	if Input.is_mouse_button_pressed(1) and transition == false:
-		$cameraAnim.play("fishing_transition")
-		$"../hook/hookAnim".play("hook_throw")
+		$Camera3D/cameraAnim.play("fishing_transition")
+		$hook/hookAnim.play("hook_throw")
 		transition = true
 		_on_camera_anim_animation_finished("fishing_transition")
 	pass
