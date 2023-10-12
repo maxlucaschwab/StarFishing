@@ -1,7 +1,9 @@
-extends StaticBody3D
+extends Area3D
 
-var starIncrement = 0
-var constellation = {0:[], 1:[], 2:[]}
+var entered = false
+
+var index = 0
+var constellation = {0:[-23, 19, -17], 1:[-8, 11, -26], 2:[8, 21, -26]}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +19,9 @@ func _input(event):
 		translate_object_local(Vector3(event.relative.x/3, -event.relative.y/3, 0).normalized())
 
 
-func _on_star_body_entered(body):
-	body.position = Vector3(-45, 17, 23.025)
-	pass # Replace with function body.
+
+func _on_area_entered(area):
+	print("hello")
+	if area.has_method("hooked"):
+		area.position = Vector3(constellation[index][0], constellation[index][1], constellation[index][2])
+		index += 1

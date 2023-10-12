@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2oahalrbhtax"]
+
+[ext_resource type="Script" path="res://star_0.gd" id="1_8gib8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_f0ifc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a80og"]
+
+[node name="star0" type="Area3D" groups=["stars"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -4, 9)
+script = ExtResource("1_8gib8")
+
+[node name="starMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_f0ifc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.37913, 0, 0, 0, 1.37913, 0, 0, 0, 1.37913, 0, 0, 0)
+shape = SubResource("SphereShape3D_a80og")
