@@ -15,7 +15,8 @@ func _process(delta):
 	#	$cameraAnim.play("fishing_transition")
 	mainGameplay()
 	if transition == true and openAnimation == true:
-		$Camera3D.position += Vector3(0, -0.05, 0)
+		$Camera3D.position += Vector3(0, -0.03, 0)
+		$hook.position += Vector3(0, -0.02, 0)
 	pass
 	
 	if Input.is_action_just_pressed("quit"):

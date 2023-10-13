@@ -6,6 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://cx2dykj8rbxom" path="res://hook.tscn" id="4_a5wc3"]
 [ext_resource type="PackedScene" uid="uid://b2oahalrbhtax" path="res://star_0.tscn" id="5_2kyhv"]
 
+[sub_resource type="Animation" id="Animation_o081q"]
+resource_name = "camera_down"
+length = 15.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 8.92287, -0.0614245, 13.5381, 15, 1, 8.92287, -31.0118, 13.5381)
+
 [sub_resource type="Animation" id="Animation_hgdyt"]
 resource_name = "fishing_transition"
 length = 2.0
@@ -23,17 +34,6 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0.132724, 0.242554, -0.0335191, 0.960431, 1, 1, 0.0609804, 0.357284, -0.0325694, 0.931434, 1.9, 1, 0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_o081q"]
-resource_name = "camera_down"
-length = 15.0
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 8.92287, -0.0614245, 13.5381, 15, 1, 8.92287, -31.0118, 13.5381)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iaenr"]
 _data = {
@@ -130,10 +130,10 @@ libraries = {
 [node name="star0" parent="Node3D" instance=ExtResource("5_2kyhv")]
 
 [node name="star1" parent="Node3D" instance=ExtResource("5_2kyhv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.57407, -7.63793, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.57407, -9.42881, 9)
 
 [node name="star2" parent="Node3D" instance=ExtResource("5_2kyhv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.54611, -10.657, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.54611, -14.3825, 9)
 
 [node name="empty_0" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(0.880088, 0.128771, 0.457015, -8.9407e-08, 0.962522, -0.271205, -0.474811, 0.238684, 0.847104, 2.2138, -2.38419e-07, 2.48923)

@@ -15,7 +15,7 @@ func _process(delta):
 	pass
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and $"..".transition == true:
 		translate_object_local(Vector3(event.relative.x/3, -event.relative.y/3, 0).normalized())
 
 
