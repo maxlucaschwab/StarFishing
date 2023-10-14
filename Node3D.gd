@@ -19,8 +19,11 @@ func _process(delta):
 		$hook.position += Vector3(0, -0.02, 0)
 	pass
 	
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+	if Input.is_action_just_pressed("pause"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		$"../Control".show()
+		get_tree().paused = true
+		#get_tree().quit()
 	
 	if $hook.index == 3:
 		transition = false
@@ -29,7 +32,7 @@ func _process(delta):
 
 
 func mainGameplay():
-	if Input.is_mouse_button_pressed(1) and transition == false and openAnimation == false:
+	if Input.is_action_just_pressed("cast") and transition == false and openAnimation == false:
 		$Camera3D/cameraAnim.play("fishing_transition")
 		$hook/hookAnim.play("hook_throw")
 		transition = true
@@ -41,5 +44,8 @@ func mainGameplay():
 func _on_camera_anim_animation_finished(anim_name):
 	print("test")
 	pass # Replace with function body.
+	
+#func _unhandled_input(event):
+	
 	
 

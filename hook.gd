@@ -16,12 +16,13 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseMotion and $"..".transition == true:
-		translate_object_local(Vector3(event.relative.x/3, -event.relative.y/3, 0).normalized())
+		translate_object_local(Vector3(event.relative.x/5, -event.relative.y/5, 0).normalized())
 
 
 
 func _on_area_entered(area):
 	print("hello")
 	if area.has_method("hooked"):
+		
 		area.position = Vector3(constellation[index][0], constellation[index][1], constellation[index][2])
 		index += 1
