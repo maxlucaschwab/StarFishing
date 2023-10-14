@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dm6lhdt8grlxv"]
+[gd_scene load_steps=22 format=3 uid="uid://dm6lhdt8grlxv"]
 
 [ext_resource type="Script" path="res://Node3D.gd" id="1_2kdry"]
 [ext_resource type="ArrayMesh" uid="uid://i0chebprpipi" path="res://boat_001.obj" id="1_6k0rk"]
@@ -55,10 +55,10 @@ material = ExtResource("2_6h2f3")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5wax"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.603922, 0.423529, 0.631373, 1)
+albedo_color = Color(0.588235, 0.117647, 0.431373, 1)
 roughness = 0.04
 emission_enabled = true
-emission = Color(0.168627, 0.180392, 0.305882, 1)
+emission = Color(0.133333, 0.0392157, 0.168627, 1)
 
 [sub_resource type="Animation" id="Animation_l8p6v"]
 resource_name = "boat_rocking"
@@ -77,14 +77,32 @@ _data = {
 "boat_rocking": SubResource("Animation_l8p6v")
 }
 
+[sub_resource type="Gradient" id="Gradient_srxuq"]
+colors = PackedColorArray(0.20167, 0.0842194, 0.43044, 1, 0.137741, 0.0513469, 0.198833, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w2m6s"]
+noise_type = 3
+seed = 4
+frequency = 0.1395
+fractal_gain = 2.91
+fractal_weighted_strength = 0.8
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_br28t"]
+width = 32
+height = 128
+invert = true
+seamless = true
+bump_strength = 4.7
+color_ramp = SubResource("Gradient_srxuq")
+noise = SubResource("FastNoiseLite_w2m6s")
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ctk07"]
-sky_top_color = Color(0.0784314, 0.109804, 0.345098, 1)
-sky_horizon_color = Color(0.741176, 0.333333, 0.537255, 1)
-sky_curve = 0.0750001
-sky_cover_modulate = Color(0.192157, 0.231373, 0.498039, 1)
+sky_top_color = Color(0.00784314, 0.0156863, 0.101961, 1)
+sky_horizon_color = Color(0.796078, 0.384314, 0.588235, 1)
+sky_curve = 0.0630674
+sky_cover = SubResource("NoiseTexture2D_br28t")
 ground_bottom_color = Color(0.188235, 0.313726, 0.623529, 1)
 ground_horizon_color = Color(0.435294, 0.145098, 0.415686, 1)
-sun_curve = 0.409812
 
 [sub_resource type="Sky" id="Sky_s8i4r"]
 sky_material = SubResource("ProceduralSkyMaterial_ctk07")
@@ -92,6 +110,8 @@ sky_material = SubResource("ProceduralSkyMaterial_ctk07")
 [sub_resource type="Environment" id="Environment_s2v4n"]
 background_mode = 2
 sky = SubResource("Sky_s8i4r")
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
 glow_enabled = true
 glow_levels/1 = 0.58
 glow_levels/2 = 16.0
@@ -112,7 +132,7 @@ volumetric_fog_density = 0.0079
 script = ExtResource("1_2kdry")
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
-transform = Transform3D(0.880088, 0.128771, 0.457015, -8.9407e-08, 0.962522, -0.271205, -0.474811, 0.238684, 0.847104, 2.2138, -2.38419e-07, 2.48923)
+transform = Transform3D(0.880088, 0.128771, 0.457016, -8.9407e-08, 0.962522, -0.271205, -0.474811, 0.238684, 0.847104, 2.2138, -2.38419e-07, 2.48923)
 
 [node name="cameraAnim" type="AnimationPlayer" parent="Node3D/Camera3D"]
 libraries = {
@@ -130,7 +150,7 @@ cast_shadow = 0
 mesh = SubResource("PlaneMesh_hth28")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
-transform = Transform3D(0.577578, -0.592971, 0.56106, -0.630631, 0.112324, 0.767911, -0.51837, -0.797351, -0.30907, 5.62443, 6.6119, -3.68748)
+transform = Transform3D(0.177802, 0.763233, 0.621178, 0.334648, -0.640511, 0.691199, 0.925417, 0.0849799, -0.369299, 2.01619, 0.778903, -0.960683)
 light_energy = 0.238
 
 [node name="boat" type="MeshInstance3D" parent="Node3D"]
