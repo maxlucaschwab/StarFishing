@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dm6lhdt8grlxv"]
+[gd_scene load_steps=26 format=3 uid="uid://dm6lhdt8grlxv"]
 
 [ext_resource type="Script" path="res://Node3D.gd" id="1_2kdry"]
 [ext_resource type="ArrayMesh" uid="uid://i0chebprpipi" path="res://boat_001.obj" id="1_6k0rk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://dssuos3woi3v" path="res://waterMaterial.tres" id="2_6h2f3"]
 [ext_resource type="PackedScene" uid="uid://cx2dykj8rbxom" path="res://hook.tscn" id="4_a5wc3"]
 [ext_resource type="PackedScene" uid="uid://b2oahalrbhtax" path="res://star_0.tscn" id="5_2kyhv"]
+[ext_resource type="PackedScene" uid="uid://debtffqsy0r7x" path="res://obstacle.tscn" id="7_kqjui"]
 
 [sub_resource type="Animation" id="Animation_o081q"]
 resource_name = "camera_down"
@@ -35,9 +36,37 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0.132724, 0.242554, -0.0335191, 0.960431, 1, 1, 0.0609804, 0.357284, -0.0325694, 0.931434, 1.9, 1, 0, 0, 0, 1)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:fov")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [75.0, 75.0, 90.0]
+}
+
+[sub_resource type="Animation" id="Animation_x73do"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [75.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iaenr"]
 _data = {
+"RESET": SubResource("Animation_x73do"),
 "camera_down": SubResource("Animation_o081q"),
 "fishing_transition": SubResource("Animation_hgdyt")
 }
@@ -145,7 +174,7 @@ volumetric_fog_density = 0.0079
 script = ExtResource("1_2kdry")
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
-transform = Transform3D(0.880088, 0.128771, 0.457016, -8.9407e-08, 0.962522, -0.271205, -0.474811, 0.238684, 0.847104, 2.2138, -2.38419e-07, 2.48923)
+transform = Transform3D(0.880088, 0.128771, 0.457015, -8.9407e-08, 0.962522, -0.271205, -0.474811, 0.238684, 0.847104, 2.2138, -2.38419e-07, 2.48923)
 
 [node name="cameraAnim" type="AnimationPlayer" parent="Node3D/Camera3D"]
 libraries = {
@@ -168,7 +197,7 @@ transform = Transform3D(0.177802, 0.763233, 0.621178, 0.334648, -0.640511, 0.691
 light_energy = 0.238
 
 [node name="boat" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(0.0824082, 0, 0.996599, 0, 1, 0, -0.996599, 0, 0.0824082, 0.131935, 0.111925, 0.208257)
+transform = Transform3D(0.0824082, 0, 0.996599, 0, 1, 0, -0.996599, 0, 0.0824082, 0.131935, 0.196141, 0.208257)
 material_override = SubResource("StandardMaterial3D_i5wax")
 mesh = ExtResource("1_6k0rk")
 
@@ -181,12 +210,16 @@ libraries = {
 [node name="hook" parent="Node3D" instance=ExtResource("4_a5wc3")]
 
 [node name="star0" parent="Node3D" instance=ExtResource("5_2kyhv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7534, -14.5482, 9)
 
 [node name="star1" parent="Node3D" instance=ExtResource("5_2kyhv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.57407, -9.42881, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.78647, -22.9976, 9)
 
 [node name="star2" parent="Node3D" instance=ExtResource("5_2kyhv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.54611, -14.3825, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6353, -22.2457, 9)
+
+[node name="star3" parent="Node3D" instance=ExtResource("5_2kyhv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54595, -23.1087, 9)
 
 [node name="empty_0" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(0.880088, 0.128771, 0.457015, -8.9407e-08, 0.962522, -0.271205, -0.474811, 0.238684, 0.847104, 2.2138, -2.38419e-07, 2.48923)
@@ -194,5 +227,11 @@ skeleton = NodePath("../Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
 environment = SubResource("Environment_s2v4n")
+
+[node name="obstacle" parent="Node3D" instance=ExtResource("7_kqjui")]
+
+[node name="empty_1" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(0.106001, 0, 0, 0, 0.106001, 0, 0, 0, 0.106001, 0.302778, 0.618216, 0)
+skeleton = NodePath("../hook")
 
 [connection signal="animation_finished" from="Node3D/Camera3D/cameraAnim" to="Node3D/Camera3D" method="_on_camera_anim_animation_finished"]
