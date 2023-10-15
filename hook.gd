@@ -7,6 +7,7 @@ var constellation = {0:[-23, 19, -17], 1:[-8, 11, -26], 2:[8, 21, -26]}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$hookAnim.play("hook_bob")
 	pass # Replace with function body.
 
 

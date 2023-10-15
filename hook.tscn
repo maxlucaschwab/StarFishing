@@ -1,6 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://cx2dykj8rbxom"]
+[gd_scene load_steps=7 format=3 uid="uid://cx2dykj8rbxom"]
 
 [ext_resource type="Script" path="res://hook.gd" id="1_qibly"]
+
+[sub_resource type="Animation" id="Animation_5fxfy"]
+resource_name = "hook_bob"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.302778, 0.618216, 0, 1, 1, 0.303, 0.534, 0, 2, 1, 0.302778, 0.618216, 0)
 
 [sub_resource type="Animation" id="Animation_e37ch"]
 resource_name = "hook throw"
@@ -41,6 +53,7 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f0087"]
 _data = {
+"hook_bob": SubResource("Animation_5fxfy"),
 "hook_throw": SubResource("Animation_e37ch")
 }
 
