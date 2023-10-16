@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dm6lhdt8grlxv"]
+[gd_scene load_steps=26 format=3 uid="uid://dm6lhdt8grlxv"]
 
 [ext_resource type="Script" path="res://Node3D.gd" id="1_2kdry"]
 [ext_resource type="ArrayMesh" uid="uid://i0chebprpipi" path="res://boat_001.obj" id="1_6k0rk"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cx2dykj8rbxom" path="res://hook.tscn" id="4_a5wc3"]
 [ext_resource type="PackedScene" uid="uid://b2oahalrbhtax" path="res://star_0.tscn" id="5_2kyhv"]
 [ext_resource type="PackedScene" uid="uid://debtffqsy0r7x" path="res://obstacle.tscn" id="7_kqjui"]
-[ext_resource type="Script" path="res://obstacle.gd" id="8_5th3m"]
-[ext_resource type="PackedScene" uid="uid://dnr7fmwvu7hdg" path="res://controls.tscn" id="9_xhw7f"]
 
 [sub_resource type="Animation" id="Animation_o081q"]
 resource_name = "camera_down"
@@ -170,9 +168,7 @@ volumetric_fog_density = 0.0079
 
 [node name="Node3D" type="Node3D"]
 
-[node name="tutorial" parent="." instance=ExtResource("9_xhw7f")]
-
-[node name="menu" parent="." instance=ExtResource("1_obdbi")]
+[node name="Control" parent="." instance=ExtResource("1_obdbi")]
 
 [node name="Node3D" type="Node3D" parent="."]
 script = ExtResource("1_2kdry")
@@ -212,7 +208,7 @@ libraries = {
 }
 
 [node name="hook" parent="Node3D" instance=ExtResource("4_a5wc3")]
-transform = Transform3D(0.106001, 0, 0, 0, 0.106001, 0, 0, 0, 0.106001, 0.537879, 0.916399, 0.130194)
+transform = Transform3D(0.106001, 0, 0, 0, 0.106001, 0, 0, 0, 0.106001, 0.537879, 1.02153, 0.0540016)
 
 [node name="star0" parent="Node3D" instance=ExtResource("5_2kyhv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7534, -14.5482, 9)
@@ -234,11 +230,9 @@ skeleton = NodePath("../Camera3D")
 environment = SubResource("Environment_s2v4n")
 
 [node name="obstacle" parent="Node3D" instance=ExtResource("7_kqjui")]
-transform = Transform3D(5.79823e-08, -0.000991905, -0.767999, 7.48868e-11, 0.767999, -0.000991905, 0.768, 0, 5.79824e-08, 6.17343, -32.8182, 9.04112)
-script = ExtResource("8_5th3m")
 
 [node name="empty_1" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(0.106001, 0, 0, 0, 0.106001, 0, 0, 0, 0.106001, 0.487409, 0.72443, -0.118933)
+transform = Transform3D(0.106001, 0, 0, 0, 0.106001, 0, 0, 0, 0.106001, 0.302778, 0.618216, 0)
 skeleton = NodePath("../hook")
 
 [connection signal="animation_finished" from="Node3D/Camera3D/cameraAnim" to="Node3D/Camera3D" method="_on_camera_anim_animation_finished"]

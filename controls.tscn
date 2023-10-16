@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dnr7fmwvu7hdg"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="direction" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 168.0
+offset_right = 368.0
+offset_bottom = 194.0
+text = "PRESS LMB TO CAST"
+horizontal_alignment = 1
+
+[node name="caption" type="Label" parent="."]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 400.0
+offset_bottom = 215.0
+theme_override_font_sizes/font_size = 8
+text = "Fish for FOUR stars to form a constellation in the sky!"
+horizontal_alignment = 1

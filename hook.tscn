@@ -1,6 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cx2dykj8rbxom"]
 
 [ext_resource type="Script" path="res://hook.gd" id="1_qibly"]
+[ext_resource type="ArrayMesh" uid="uid://h5u6ohuypidt" path="res://hook.obj" id="2_xxyqi"]
 
 [sub_resource type="Animation" id="Animation_5fxfy"]
 resource_name = "hook_bob"
@@ -57,8 +58,6 @@ _data = {
 "hook_throw": SubResource("Animation_e37ch")
 }
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xh4n5"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0komr"]
 
 [node name="hook" type="Area3D"]
@@ -71,7 +70,8 @@ libraries = {
 }
 
 [node name="hookMesh" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_xh4n5")
+transform = Transform3D(1.8772, 0, 0, 0, 1.8772, 0, 0, 0, 1.8772, 0, 0, 0)
+mesh = ExtResource("2_xxyqi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.91038, 0, 0, 0, 1.91038, 0, 0, 0, 1.91038, 0, 0, 0)
